@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jewelry</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* put hte border inside block */
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .box {
+            border: 1px solid rgb(255, 255, 255);
+            color: red;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            background-image: url("images/ring.webp");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .big-box {
+            border: 1px solid rgb(255, 255, 255);
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            color: red;
+            display: flex;
+            background-image: url("images/big-ring.avif");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        footer {
+            background-color: rgb(84, 84, 84);
+        }
+
+        /* ------------------------------ PC ------------------------------ */
+        @media (min-width: 768px) {
+            body {
+                background-color: rgb(109, 143, 224);
+            }
+
+            .box {
+                background-color: rgb(199, 128, 211);
+                width: 33.3333%;
+                /* 3 blocks in a row */
+            }
+
+            .box:hover {
+                background-color: rgb(122, 49, 134);
+            }
+
+            .big-box {
+                width: 50%;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            footer {
+                min-height: 200px;
+                padding: 2rem;
+                text-align: center;
+                color: white;
+            }
+        }
+
+        /* ------------------------------ PHONE ------------------------------ */
+        @media (max-width: 767px) {
+            body {
+                background-color: tomato;
+            }
+
+            .box {
+                background-color: yellow;
+                width: 50%;
+                /* 2 blocks in a row */
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+
+            .big-box {
+                background-color: rgb(255, 187, 0);
+                width: 100%;
+            }
+
+            .big-box.b2 {
+                display: none;
+            }
+
+            footer {
+                height: 8rem;
+                padding: 1rem;
+                text-align: center;
+                color: white;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main>
+        <section class="container">
+
+            <section class="big-box b1">
+                <h1>big box 1</h1>
+            </section>
+            <section class="big-box b2">
+                <h1>big box 2</h1>
+            </section>
+
+            <section class="box">
+                <h1>1</h1>
+            </section>
+            <section class="box">
+                <h1>2</h1>
+            </section>
+            <section class="box">
+                <h1>3</h1>
+            </section>
+            <section class="box">
+                <h1>4</h1>
+            </section>
+            <section class="box">
+                <h1>5</h1>
+            </section>
+            <section class="box">
+                <h1>6</h1>
+            </section>
+            <section class="box">
+                <h1>7</h1>
+            </section>
+            <section class="box">
+                <h1>8</h1>
+            </section>
+            <section class="box">
+                <h1>9</h1>
+            </section>
+            <section class="box">
+                <h1>10</h1>
+            </section>
+            <section class="box">
+                <h1>11</h1>
+            </section>
+            <section class="box">
+                <h1>12</h1>
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        <p>Footer Content Goes Here</p>
+    </footer>
+
+</body>
+
+</html>

@@ -43,13 +43,52 @@
 
         footer {
             background-color: rgb(84, 84, 84);
+            display: flex;
+            justify-content: space-evenly;
+            font-family: Courier, monospace;
+            font-weight: 600;
+        }
+
+        footer p{
+            font-size: 2rem;
+        }
+
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .popup img {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 10px;
+            border: 1px solid rgb(255, 255, 255);
+            display: flex;
+            justify-self: center;
+        }
+
+        .popup:target {
+            display: flex;
+            justify-self: center;
+        }
+
+        a {
+            text-decoration: none;
         }
 
         /* ------------------------------ PC ------------------------------ */
         @media (min-width: 768px) {
-            body {
+            /* body {
                 background-color: rgb(109, 143, 224);
-            }
+            } */
 
             .box {
                 background-color: rgb(199, 128, 211);
@@ -79,9 +118,9 @@
 
         /* ------------------------------ PHONE ------------------------------ */
         @media (max-width: 767px) {
-            body {
+            /* body {
                 background-color: tomato;
-            }
+            } */
 
             .box {
                 background-color: yellow;
@@ -118,48 +157,61 @@
         <section class="container">
 
             <section class="big-box b1">
-                <h1>big box 1</h1>
+                <!-- <h1>big box 1</h1> -->
             </section>
             <section class="big-box b2">
-                <h1>big box 2</h1>
+                <!-- <h1>big box 2</h1> -->
             </section>
 
-            <section class="box">
-                <h1>1</h1>
+            <!-- BOX 1 -->
+            <a href="#b1" class="box">
+                <!-- <h1>1</h1> -->
+            </a>
+            <section id="b1" class="popup">
+                <a href="#"><img src="images/ring.webp" alt=""></a>
             </section>
-            <section class="box">
+
+            <!-- BOX 2 -->
+            <!-- <a href="#b2" class="box">
                 <h1>2</h1>
-            </section>
-            <section class="box">
+            </a>
+            <section id="b2" class="popup">
+                <a href="#"><img src="images/ring.webp" alt=""></a>
+            </section> -->
+
+            <!-- BOX 3 -->
+            <!-- <a href="#b3" class="box">
                 <h1>3</h1>
-            </section>
-            <section class="box">
+            </a>
+            <section id="b3" class="popup">
+                <a href="#"><img src="images/ring.webp" alt=""></a>
+            </section> -->
+
+            <!-- BOX 4 -->
+            <!-- <a href="#b4" class="box">
                 <h1>4</h1>
-            </section>
-            <section class="box">
+            </a>
+            <section id="b4" class="popup">
+                <a href="#"><img src="images/ring.webp" alt=""></a>
+            </section> -->
+
+            <!-- BOX 5 -->
+            <!-- <a href="#b5" class="box">
                 <h1>5</h1>
-            </section>
-            <section class="box">
+            </a>
+            <section id="b5" class="popup">
+                <a href="#"><img src="images/ring.webp" alt=""></a>
+            </section> -->
+
+            <!-- BOX 6 -->
+            <!-- <a href="#b6" class="box">
                 <h1>6</h1>
-            </section>
-            <section class="box">
-                <h1>7</h1>
-            </section>
-            <section class="box">
-                <h1>8</h1>
-            </section>
-            <section class="box">
-                <h1>9</h1>
-            </section>
-            <section class="box">
-                <h1>10</h1>
-            </section>
-            <section class="box">
-                <h1>11</h1>
-            </section>
-            <section class="box">
-                <h1>12</h1>
-            </section>
+            </a>
+            <section id="b6" class="popup">
+                <a href="#"><img src="images/ring.webp" alt=""></a>
+            </section> -->
+
+
 
         </section>
 
@@ -167,8 +219,35 @@
 
 
     <footer>
-        <p>Footer Content Goes Here</p>
+        <section class="fbox">
+            <p>VladisArt</p>
+        </section>
+        <section class="fbox">
+            <p>054-7674374</p>
+        </section>
+
     </footer>
+
+
+    <script>
+        const container = document.querySelector(".container");
+        const numBoxes = 12; // Adjust this number if you want more boxes (currently starts from 7 to 20)
+
+        for (let i = 2; i <= numBoxes; i++) {
+            const boxLink = document.createElement("a");
+            boxLink.href = `#b${i}`;
+            boxLink.className = "box";
+            // boxLink.innerHTML = `<h1>${i}</h1>`;
+
+            const popup = document.createElement("section");
+            popup.id = `b${i}`;
+            popup.className = "popup";
+            popup.innerHTML = `<a href="#"><img src="images/ring.webp" alt=""></a>`;
+
+            container.appendChild(boxLink);
+            container.appendChild(popup);
+        }
+    </script>
 
 </body>
 

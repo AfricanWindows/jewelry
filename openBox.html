@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Target Example</title>
+    <style>
+        .popup {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+        }
+
+        .popup:target {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="#box1">Open Box 1</a>
+
+    <div id="box1" class="popup">
+        This is Box 1
+        <a href="#">Close</a>
+    </div>
+
+</body>
+</html>

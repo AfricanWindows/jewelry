@@ -3,47 +3,102 @@
 
 <head>
     <meta name="google-adsense-account" content="ca-pub-8423477286998335">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VladisArt Page</title>
+
     <style>
+        /* ========== Base / Reset ========== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         }
 
-        html {
-            background-color: black;
+        :root {
+            --bg: #0b0b0b;
+            --surface: #1c1c1c;
+            --accent: #e9c46a;
+            --accent-2: #283618;
+            --text: #f5f5f5;
+            --muted: #bdbdbd;
+            --border: #2c2c2c;
+            --gap: 16px;
+            --radius: 12px;
+            --shadow: 0 6px 24px rgba(0, 0, 0, .35);
         }
 
-        .container {
+        html,
+        body {
+            height: 100%;
+            background: var(--bg);
+            color: var(--text);
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ========== Header ========== */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: var(--accent-2);
+            border-bottom: 1px solid #1a2610;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, .25);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px clamp(16px, 3vw, 28px);
             display: flex;
-            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: clamp(24px, 7vw, 80px);
         }
 
-        .box {
-            border: 1px solid rgb(255, 255, 255);
-            color: yellow;
-            aspect-ratio: 1 / 1;
-            display: flex;
-            background-image: url("images/ring.webp");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+        .nav a {
+            font-weight: 600;
+            letter-spacing: .3px;
+            font-size: clamp(16px, 2.2vw, 22px);
+            opacity: .95;
+        }
+
+        .nav a:hover {
+            transform: translateY(-1px);
+            opacity: 1;
+        }
+
+        /* ========== Main / Hero ========== */
+        main {
+            padding: clamp(16px, 2.5vw, 28px);
+        }
+
+        .wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* hero strip (2 big boxes) */
+        .hero {
+            display: grid;
+            gap: var(--gap);
+            grid-template-columns: repeat(2, 1fr);
+            margin-bottom: clamp(16px, 3vw, 28px);
         }
 
         .big-box {
-            border: 1px solid rgb(255, 255, 255);
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            color: red;
-            display: flex;
-            background-image: url("images/big-ring.avif");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            position: relative;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            background: url("images/big-ring.avif") center/cover no-repeat;
+            box-shadow: var(--shadow);
         }
 
         .big-box video {
@@ -51,317 +106,323 @@
             height: 100%;
             object-fit: cover;
             object-position: top;
+            display: block;
         }
 
-        footer {
-            background-color: rgb(59, 59, 59);
-            display: flex;
-            justify-content: space-evenly;
-            font-weight: 600;
+        /* ========== Gallery Grid ========== */
+        .gallery {
+            display: grid;
+            gap: var(--gap);
+            grid-template-columns: repeat(3, 1fr);
         }
 
-        footer p {
-            font-size: 2rem;
+        .box {
+            position: relative;
+            aspect-ratio: 1/1;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: url("images/ring.webp") center/cover no-repeat;
+            box-shadow: var(--shadow);
+            transition: transform .2s ease, box-shadow .2s ease;
         }
 
+        .box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, .45);
+        }
+
+        /* Popup (CSS-only lightbox using :target) */
         .popup {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.8);
+            inset: 0;
             display: none;
             align-items: center;
             justify-content: center;
+            background: rgba(0, 0, 0, .8);
             z-index: 1000;
-        }
-
-        .popup img {
-            max-width: 100%;
-            max-height: 100%;
-            border-radius: 10px;
-            border: 1px solid rgb(255, 255, 255);
-            display: flex;
-            justify-self: center;
+            padding: 24px;
+            backdrop-filter: blur(2px);
         }
 
         .popup:target {
             display: flex;
-            justify-self: center;
         }
 
-        a {
-            text-decoration: none;
+        .popup .frame {
+            max-width: min(1000px, 92vw);
+            max-height: 85vh;
+            border: 1px solid #fff2;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 14px 40px rgba(0, 0, 0, .6);
+            background: #000;
         }
 
-        header {
-            display: flex;
-            justify-content: center;
-            height: 80px;
-            background-color: #283618;
+        .popup img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+            background: #000;
         }
 
-        nav {
-            display: flex;
-            gap: 100px;
-            align-items: center;
+        .popup .close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #ffffff10;
+            display: grid;
+            place-items: center;
+            border: 1px solid #ffffff30;
+            font-weight: 700;
         }
 
-        nav a {
-            font-size: 30px;
-            color: white;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        .popup .close:hover {
+            background: #ffffff18;
         }
 
-        nav a:hover {
-            scale: 1.1;
+        /* ========== Footer ========== */
+        footer {
+            background: #1a1a1a;
+            border-top: 1px solid var(--border);
+            margin-top: clamp(20px, 4vw, 40px);
         }
 
         #fblock {
-            display: flex;
-            width: 100%;
-            justify-content: center;
-            gap: 100px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: clamp(18px, 3vw, 28px) clamp(16px, 3vw, 28px);
+            display: grid;
+            gap: clamp(16px, 2.5vw, 28px);
+            grid-template-columns: 160px 1fr auto;
             align-items: center;
         }
 
-        #fblock #vladimg {
-            width: 100px;
-            height: 150px;
-            border: 1px solid white;
+        /* profile image normalized */
+        #vladimg {
+            width: 140px;
+            height: 140px;
+            border-radius: 14px;
+            border: 1px solid #fff2;
             object-fit: cover;
+            object-position: center;
+            background: linear-gradient(145deg, #2b2b2b, #1a1a1a);
+            box-shadow: var(--shadow);
+            display: block;
         }
 
-        .fbox img {
-            width: 50px;
-            height: 50px;
-        }
-
-
-        .fbox {
+        .brand {
             display: flex;
             flex-direction: column;
+            gap: 8px;
         }
 
-        #fblock .fbox a {
+        .brand .title {
+            font-size: clamp(20px, 3vw, 28px);
+            font-weight: 700;
+            letter-spacing: .4px;
+        }
+
+        .brand .phone {
+            font-size: clamp(16px, 2.5vw, 20px);
+            color: var(--muted);
+        }
+
+        .social {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .social a {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            color: white;
-            text-decoration: none;
+            padding: 8px 10px;
+            border-radius: 10px;
+            border: 1px solid #ffffff12;
+            background: #ffffff06;
         }
 
-        #fblock .fbox a img {
+        .social a:hover {
+            background: #ffffff10;
+        }
+
+        .social img {
             width: 28px;
             height: 28px;
             object-fit: contain;
+            display: block;
         }
 
-        /* ------------------------------ PC ------------------------------ */
-        @media (min-width: 768px) {
-            /* body {
-                background-color: rgb(109, 143, 224);
-            } */
-
-            .box {
-                background-color: rgb(199, 128, 211);
-                width: 33.3333%;
-                /* 3 blocks in a row */
-            }
-
-            .box:hover {
-                background-color: rgb(122, 49, 134);
-            }
-
-            .big-box {
-                width: 50%;
-            }
-
-            h1 {
-                font-size: 3rem;
-            }
-
-            footer {
-                min-height: 200px;
-                padding: 2rem;
-                text-align: center;
-                color: white;
+        /* ========== Responsive ========== */
+        @media (max-width: 1024px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
-        /* ------------------------------ PHONE ------------------------------ */
-        @media (max-width: 767px) {
-
-            /* body {
-                background-color: tomato;
-            } */
-            .box {
-                background-color: yellow;
-                width: 50%;
-                /* 2 blocks in a row */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
             }
 
-            h1 {
-                font-size: 3rem;
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .big-box {
-                background-color: rgb(255, 187, 0);
-                width: 100%;
-            }
-
-            .big-box.b2 {
-                display: none;
-            }
-
-            footer {
-                height: 8rem;
-                padding: 1rem;
+            #fblock {
+                grid-template-columns: 1fr;
                 text-align: center;
-                color: white;
             }
 
-            header {
-                width: 100%;
+            .brand {
+                align-items: center;
             }
 
-            nav a {
-                font-size: 20px;
+            .social {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gallery {
+                grid-template-columns: 1fr 1fr;
             }
 
-            nav {
-                width: 100%;
-                gap: 15px;
-
+            .social img {
+                width: 24px;
+                height: 24px;
             }
+        }
+
+        /* a11y helpers */
+        .skip-link {
+            position: absolute;
+            left: 1rem;
+            top: -4rem;
+            background: #0a7cff;
+            color: #fff;
+            padding: .5rem .75rem;
+            border-radius: .5rem;
+            z-index: 999;
+        }
+
+        .skip-link:focus {
+            top: 1rem;
+            outline: 3px solid #fff5;
+        }
+
+        :focus-visible {
+            outline: 3px solid #0a7cff;
+            outline-offset: 2px;
+            border-radius: 8px;
         }
     </style>
 </head>
 
 <body>
-    <!-- here is google adsense script -->
+
+    <!-- Google AdSense -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8423477286998335"
         crossorigin="anonymous"></script>
 
+    <a class="skip-link" href="#content">Skip to content</a>
+
     <header>
-        <nav>
-            <a href="#">My works</a>
-            <a href="#">About me</a>
-            <a href="#">Contact</a>
+        <nav class="nav" aria-label="Primary">
+            <a href="#works">My works</a>
+            <a href="#about">About me</a>
+            <a href="#contact">Contact</a>
         </nav>
     </header>
 
+    <main id="content">
+        <div class="wrap">
 
-    <main>
-        <section class="container">
-
-            <section class="big-box b1">
-                <!-- <h1>big box 1</h1> -->
-                <video src="images/b1-video.mp4" autoplay muted loop playsinline></video>
-            </section>
-            <section class="big-box b2">
-                <!-- <h1>big box 2</h1> -->
-            </section>
-
-            <!-- BOX 1 -->
-            <a href="#b1" class="box">
-                <!-- <h1>1</h1> -->
-            </a>
-            <section id="b1" class="popup">
-                <a href="#"><img src="images/ring.webp" alt=""></a>
+            <!-- Hero strip -->
+            <section class="hero" aria-label="Featured">
+                <div class="big-box">
+                    <video src="images/b1-video.mp4" autoplay muted loop playsinline></video>
+                </div>
+                <div class="big-box" aria-hidden="true"></div>
             </section>
 
-            <!-- BOX 2 -->
-            <!-- <a href="#b2" class="box">
-                <h1>2</h1>
-            </a>
-            <section id="b2" class="popup">
-                <a href="#"><img src="images/ring.webp" alt=""></a>
-            </section> -->
+            <!-- Gallery -->
+            <section id="works" class="gallery" aria-label="Gallery">
+                <!-- first tile is clickable popup -->
+                <a href="#b1" class="box" aria-label="Open item 1"></a>
 
-            <!-- BOX 3 -->
-            <!-- <a href="#b3" class="box">
-                <h1>3</h1>
-            </a>
-            <section id="b3" class="popup">
-                <a href="#"><img src="images/ring.webp" alt=""></a>
-            </section> -->
+                <!-- JS will append the rest -->
+            </section>
 
-            <!-- BOX 4 -->
-            <!-- <a href="#b4" class="box">
-                <h1>4</h1>
-            </a>
-            <section id="b4" class="popup">
-                <a href="#"><img src="images/ring.webp" alt=""></a>
-            </section> -->
+            <!-- Popups (lightbox) -->
+            <section id="b1" class="popup" aria-modal="true" role="dialog">
+                <a class="close" href="#" aria-label="Close">✕</a>
+                <div class="frame">
+                    <img src="images/ring.webp" alt="Artwork close-up">
+                </div>
+            </section>
 
-            <!-- BOX 5 -->
-            <!-- <a href="#b5" class="box">
-                <h1>5</h1>
-            </a>
-            <section id="b5" class="popup">
-                <a href="#"><img src="images/ring.webp" alt=""></a>
-            </section> -->
-
-            <!-- BOX 6 -->
-            <!-- <a href="#b6" class="box">
-                <h1>6</h1>
-            </a>
-            <section id="b6" class="popup">
-                <a href="#"><img src="images/ring.webp" alt=""></a>
-            </section> -->
-
-
-
-        </section>
-
+        </div>
     </main>
 
-
+    <!-- Footer -->
     <footer>
         <section id="fblock">
-            <img id="vladimg" src="" alt="vlad">
-            <section class="fbox">
-                <p>VladisArt</p>
-                <p>0547674374</p>
-            </section>
-            <section class="fbox">
-                <a href="#">
-                    <img src="images/facebook.png" alt="">
-                    <p>Facebook</p>
-                </a>
-                <br>
-                <a href="https://www.youtube.com/@VladisArt78" target="_blank">
-                    <img src="images/youtube.png" alt="">
-                    <p>Youtube</p>
-                </a>
-            </section>
-        </section>
+            <!-- Profile -->
+            <img id="vladimg" src="images/vladizzz.jpg" alt="Vladis portrait">
 
+            <!-- Brand -->
+            <div class="brand">
+                <div class="title">VladisArt</div>
+                <div class="phone">054-767-4374</div>
+            </div>
+
+            <!-- Social -->
+            <div class="social">
+                <a href="#" aria-label="Facebook">
+                    <img src="images/facebook.png" alt="" />
+                    <span>Facebook</span>
+                </a>
+                <a href="https://www.youtube.com/@VladisArt78" target="_blank" rel="noopener" aria-label="YouTube">
+                    <img src="images/youtube.png" alt="" />
+                    <span>Youtube</span>
+                </a>
+            </div>
+        </section>
     </footer>
 
-
     <script>
-        const container = document.querySelector(".container");
-        const numBoxes = 12; // Adjust this number if you want more boxes (currently starts from 7 to 20)
+        // Build gallery items & popups
+        const gallery = document.querySelector(".gallery");
+        const total = 12; // number of tiles total (1 already exists)
 
-        for (let i = 2; i <= numBoxes; i++) {
-            const boxLink = document.createElement("a");
-            boxLink.href = `#b${i}`;
-            boxLink.className = "box";
-            // boxLink.innerHTML = `<h1>${i}</h1>`;
+        for (let i = 2; i <= total; i++) {
+            const tile = document.createElement("a");
+            tile.href = `#b${i}`;
+            tile.className = "box";
+            tile.setAttribute("aria-label", `Open item ${i}`);
+            gallery.appendChild(tile);
 
             const popup = document.createElement("section");
             popup.id = `b${i}`;
             popup.className = "popup";
-            popup.innerHTML = `<a href="#"><img src="images/ring.webp" alt=""></a>`;
-
-            container.appendChild(boxLink);
-            container.appendChild(popup);
+            popup.setAttribute("aria-modal", "true");
+            popup.setAttribute("role", "dialog");
+            popup.innerHTML = `
+        <a class="close" href="#" aria-label="Close">✕</a>
+        <div class="frame">
+          <img src="images/ring.webp" alt="Artwork close-up ${i}">
+        </div>
+      `;
+            document.body.appendChild(popup);
         }
     </script>
-
 </body>
 
 </html>
